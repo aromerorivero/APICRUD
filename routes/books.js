@@ -7,7 +7,6 @@ const app = express();
 *   name: Books
 *   description: Books API REST
 */
-
 /**
 * @swagger
 * components:
@@ -169,21 +168,43 @@ app.put("/:id", (req, res) => {
 *       - "application/json"
 *     responses:
 *       200:
-*         description: "json response {book: <book-object>}"
+*         description: "Libro añadido""
 *       400:
-*         description: "datos del libro obligatorio"
+*         description: "Datos del libro obligatorio","Titulo del libro obligatorio","Autor del libro obligatorio"
+*                       "Editorial del libro obligatorio","Id del libro obligatorio"
 *       500:
 *         description: "Server error"
 */
 app.post("/", (req, res) => {
+   
     if (!req.body) {
         return res.status(400).json({
-            message: "datos del libro obligatorios"
+            message: "Datos del libro obligatorios"
+        });
+    } 
+    if (!req.body.titulo) {
+        return res.status(400).json({
+            message: "Titulo del libro obligatorio"
+        });
+    }
+    if (!req.body.autor) {
+        return res.status(400).json({
+            message: "Autor del libro obligatorio"
+        });
+    }
+    if (!req.body.editorial) {
+        return res.status(400).json({
+            message: "Editorial del libro obligatoria"
+        });
+    }
+    if (!req.body.id) {
+        return res.status(400).json({
+            message: "Id del libro obligatorio"
         });
     }
     books.push(req.body);
     res.status(200).json({
-        message: "Libro añadido correctamente",
+        message: "Libro añadido",
         book: books[books.length - 1]
     });
 });
