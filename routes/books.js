@@ -44,7 +44,7 @@ const books = [
 *   get:
 *     summary: Devuelve libros que coinciden con el id
 *     tags: 
-*       
+*       - Books
 *     parameters:
 *       - in: query
 *         name: id
@@ -81,6 +81,7 @@ app.get("/search", (req, res) => {
 *   put:
 *     summary: Actualizar libro
 *     tags: 
+*       - Books
 *     parameters:
 *       - in: body
 *         name: id
@@ -140,40 +141,42 @@ app.put("/:id", (req, res) => {
 });
 /**
 * @swagger
-* routes/:
+* /:
 *   post:
-*     summary: "añade un nuevo libro"
+*     summary: "Añade un nuevo libro"
 *     tags: 
-*     parameters:
-*       - in: body
-*         name: "book object"
-*         description: "añade un libro con los campos de titulo, autor, editorial y id"
-*         schema:
-*           type: "object"
-*           required:
-*             - titulo
-*             - autor
-*             - editorial
-*             - id   
-*           properties:
-*             titulo:
-*               type: "string"
-*             autor:
-*               type: "string"
-*             editorial:
-*               type: "string"
-*             id:
-*               type: "string"
-*     produces:
-*       - "application/json"
+*       - Books
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             required:
+*               - titulo
+*               - autor
+*               - editorial
+*               - id
+*             properties:
+*               titulo:
+*                 type: string
+*                 description: Título del libro
+*               autor:
+*                 type: string
+*                 description: Autor del libro
+*               editorial:
+*                 type: string
+*                 description: Editorial del libro
+*               id:
+*                 type: string
+*                 description: ID único del libro
 *     responses:
 *       200:
-*         description: "Libro añadido""
+*         description: "Libro añadido"
 *       400:
-*         description: "Datos del libro obligatorio","Titulo del libro obligatorio","Autor del libro obligatorio"
-*                       "Editorial del libro obligatorio","Id del libro obligatorio"
+*         description: "Datos del libro obligatorios, Titulo del libro obligatorio, Autor del libro obligatorio, Editorial del libro obligatoria, Id del libro obligatorio"
 *       500:
-*         description: "Server error"
+*         description: "Error del servidor"
 */
 app.post("/", (req, res) => {
    
@@ -213,7 +216,8 @@ app.post("/", (req, res) => {
 * routes/id:
 *   delete:
 *     summary: "Eliminar un libro"
-*     tags:
+*     tags: 
+*       - Books
 *     parameters:
 *       - in: path
 *         name: id
@@ -254,53 +258,3 @@ app.delete("/:id", (req, res) => {
 
 
 module.exports = app;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
